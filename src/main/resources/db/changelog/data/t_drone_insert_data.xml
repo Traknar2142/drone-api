@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="t_drone_insert_data" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="t_drone"/>
+        </preConditions>
+        <insert tableName="t_drone">
+            <column name="serial_number" value="DR-01"/>
+            <column name="model" value="Lightweight"/>
+            <column name="weight" value="20"/>
+            <column name="percentage" value="100"/>
+            <column name="state" value="LOADING"/>
+        </insert>
+        <insert tableName="t_drone">
+            <column name="serial_number" value="DR-02"/>
+            <column name="model" value="Middleweight"/>
+            <column name="weight" value="40"/>
+            <column name="percentage" value="100"/>
+            <column name="state" value="LOADING"/>
+        </insert>
+        <insert tableName="t_drone">
+            <column name="serial_number" value="DR-03"/>
+            <column name="model" value="Lightweight"/>
+            <column name="weight" value="20"/>
+            <column name="percentage" value="100"/>
+            <column name="state" value="IDLE"/>
+        </insert>
+        <insert tableName="t_drone">
+            <column name="serial_number" value="DR-04"/>
+            <column name="model" value="Middleweight"/>
+            <column name="weight" value="40"/>
+            <column name="percentage" value="100"/>
+            <column name="state" value="IDLE"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

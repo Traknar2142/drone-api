@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="t_medication_create" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="t_medication"/>
+                </not>
+            </and>
+        </preConditions>
+
+        <createTable tableName="t_medication">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"  deleteCascade="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="weight" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="image" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createIndex tableName="t_medication" indexName="idx_t_medication_code">
+            <column name="code"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

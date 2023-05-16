@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="false" dbms="postgresql,mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="h2"/>
+    <changeSet id="t_cargo_create" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="t_cargo"/>
+                </not>
+            </and>
+        </preConditions>
+
+        <createTable tableName="t_cargo">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" deleteCascade="true"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="weight" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="medication_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="fk_medication_id" references="t_medication(id)" deleteCascade="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

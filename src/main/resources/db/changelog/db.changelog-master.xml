@@ -1,0 +1,16 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <include file="db/changelog/t_drone.xml"/>
+    <include file="db/changelog/data/t_drone_insert_data.xml"/>
+    <include file="db/changelog/t_medication.xml"/>
+    <include file="db/changelog/data/t_medication_insert_data.xml"/>
+    <include file="db/changelog/t_cargo.xml"/>
+    <include file="db/changelog/data/t_cargo_insert_data.xml"/>
+    <include file="db/changelog/t_drone_cargo_relation.xml"/>
+    <include file="db/changelog/data/t_drone_cargo_relation_insert_data.xml"/>
+
+</databaseChangeLog>
