@@ -19,5 +19,20 @@ services:
       SPRING_DATASOURCE_PASSWORD: 1234
     depends_on:
       - database
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - ./:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
 volumes:
   pgdata:
+  grafana-data:
