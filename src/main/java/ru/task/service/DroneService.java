@@ -10,6 +10,7 @@ public interface DroneService {
     List<Drone> saveAll(List<Drone> drones);
     Drone findBySerialNumber(String serialNumber);
     List<Drone> findByState(State state);
+    List<Drone> findByStateAndPercentageGreaterThan(State state, Integer percentage);
     List<Drone> findByStateIn(List<State> states);
     List<Drone> findAll();
     Drone updateDrone(Drone drone);

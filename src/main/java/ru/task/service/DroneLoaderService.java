@@ -8,10 +8,8 @@ import ru.task.dto.response.DroneOperationResponse;
 import ru.task.enums.State;
 import ru.task.model.Cargo;
 import ru.task.model.Drone;
-import ru.task.model.Medication;
 import ru.task.validator.Validator;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +28,7 @@ public class DroneLoaderService {
     }
 
     @Transactional
-    public DroneOperationResponse loadProcess(LoadRequest loadRequest) {
+    public DroneOperationResponse manualLoadProcess(LoadRequest loadRequest) {
         DroneMainParameters droneMainParameters = mapper.getDroneMainParameters(loadRequest);
         //validation stage
         validators.forEach(validator -> validator.validate(droneMainParameters));
@@ -41,17 +39,7 @@ public class DroneLoaderService {
         actualizeState(drone);
 
         //load stage
-        List<Medication> medications = droneMainParameters.getMedications();
-        Set<Cargo> cargos = new HashSet<>();
-        for (Medication medication : medications) {
-            Integer quantity = loadRequest.getMedicationRequests()
-                    .stream()
-                    .filter(req -> req.getMedicationCode().equals(medication.getCode()))
-                    .findFirst()
-                    .get().getQuantity();
-            Integer cargoWeight = medication.getWeight() * quantity;
-            cargos.add(new Cargo(quantity, cargoWeight, medication));
-        }
+        Set<Cargo> cargos = cargoService.createCargo(droneMainParameters.getMedications());;
 
         if (!drone.getCargo().isEmpty()){
             cargoService.deleteCargo(drone.getCargo());
@@ -61,6 +49,7 @@ public class DroneLoaderService {
         droneService.saveDrone(drone);
         return new DroneOperationResponse(droneMainParameters.getDroneSerialNumber(), "Drone loaded successfully");
     }
+
 
     private void actualizeState(Drone drone) {
         if (drone.getState().equals(State.IDLE)) {

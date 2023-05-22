@@ -54,7 +54,7 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "t_drone_cargo_relation",
             joinColumns = @JoinColumn(name = "drone_id"),
             inverseJoinColumns = @JoinColumn(name = "cargo_id"))

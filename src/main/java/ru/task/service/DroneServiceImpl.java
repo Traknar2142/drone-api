@@ -41,6 +41,11 @@ public class DroneServiceImpl implements DroneService{
     }
 
     @Override
+    public List<Drone> findByStateAndPercentageGreaterThan(State state, Integer percentage) {
+        return droneRepository.findByStateAndPercentageGreaterThan(state, percentage);
+    }
+
+    @Override
     public List<Drone> findByStateIn(List<State> states) {
         return droneRepository.findByStateIn(states);
     }

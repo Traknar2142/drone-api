@@ -63,7 +63,6 @@ public class DroneSimulationScheduler {
                 drone.setState(target);
                 drone.setPercentage(drone.getPercentage() - chargeConsumption);
                 if (target.equals(State.DELIVERED)){
-                    cargoService.deleteCargo(drone.getCargo());
                     drone.setCargo(Collections.emptySet());
                 }
             }

@@ -5,7 +5,7 @@ import lombok.Setter;
 import ru.task.enums.State;
 import ru.task.model.Medication;
 
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -14,5 +14,5 @@ public class DroneMainParameters {
     private Integer weight;
     private State state;
     private Integer percentage;
-    private List<Medication> medications;
+    private Map<Medication, Integer> medications;
 }

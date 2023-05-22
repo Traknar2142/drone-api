@@ -82,7 +82,7 @@ public class DroneController {
             @ApiResponse(code = 400, message = "Drone is overweight")
     })
     public ResponseEntity<DroneOperationResponse> loadMedicine(@Valid @RequestBody LoadRequest loadRequest){
-        DroneOperationResponse droneOperationResponse = droneLoaderService.loadProcess(loadRequest);
+        DroneOperationResponse droneOperationResponse = droneLoaderService.manualLoadProcess(loadRequest);
         return ResponseEntity.ok(droneOperationResponse);
     }
 

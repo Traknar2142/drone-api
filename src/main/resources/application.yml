@@ -18,6 +18,17 @@ spring:
         default_schema: drones
         format_sql: true
 
+  cloud:
+    stream:
+      bindings:
+        orderPublisher:
+          destination: order
+        orderSubscriber:
+          destination: order
+      kafka:
+        binder:
+          defaultBrokerPort: 9092
+
 management:
   endpoints:
     web:

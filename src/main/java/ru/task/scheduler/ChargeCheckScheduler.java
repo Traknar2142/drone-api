@@ -8,7 +8,7 @@ import ru.task.service.DroneService;
 
 import java.util.List;
 
-@Component
+/*@Component
 @Slf4j
 public class ChargeCheckScheduler {
     private final DroneService droneService;
@@ -22,4 +22,4 @@ public class ChargeCheckScheduler {
         List<Drone> drones = droneService.findAll();
         drones.forEach(dr -> log.info("Drone charge check: serial number: " + dr.getSerialNumber() + " percentage: " + dr.getPercentage()));
     }
-}
+}*/
