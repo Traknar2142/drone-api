@@ -56,26 +56,26 @@ public class OrderProcessor {
         //Загружаем дроны и отправляем
         Iterator<Cargo> iterator = cargos.iterator();
         List<Drone> idleDrones = droneService.findByStateAndPercentageGreaterThan(State.IDLE, 25);
-        while (iterator.hasNext()) {
-            if (!idleDrones.isEmpty()){
-                loadDroneAndPerformDelivery(iterator, idleDrones);
-            }
-            if (iterator.hasNext()){
-                idleDrones = droneService.findByStateAndPercentageGreaterThan(State.IDLE, 25);;
-            }
+        if (!idleDrones.isEmpty()) {
+            loadDroneAndPerformDelivery(iterator, idleDrones);
         }
+
     }
 
-    private void loadDroneAndPerformDelivery(Iterator<Cargo> iterator, List<Drone> drones){
+    private void loadDroneAndPerformDelivery(Iterator<Cargo> iterator, List<Drone> drones) {
+        Cargo cargo = null;
         for (Drone drone : drones) {
             drone.setCargo(new HashSet<>());
             while (iterator.hasNext()) {
-                Cargo cargo = iterator.next();
+                if (cargo == null) {
+                    cargo = iterator.next();
+                }
                 if (droneIsOverweighted(drone, cargo)) {
                     performDelivery(drone);
                     break;
                 } else {
                     drone.getCargo().add(cargo);
+                    cargo = null;
                 }
             }
             if (!drone.getCargo().isEmpty() && drone.getState().equals(State.IDLE)) {
@@ -128,6 +128,7 @@ public class OrderProcessor {
     private void performDelivery(Drone drone) {
         drone.setState(State.LOADING);
         droneService.saveDrone(drone);
+        System.out.println(drone);
         droneDeliverService.deliveryProcess(drone.getSerialNumber());
     }
 
