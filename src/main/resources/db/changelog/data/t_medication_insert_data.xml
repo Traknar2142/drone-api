@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="t_medication_insert_data" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="t_medication"/>
+        </preConditions>
+        <insert tableName="t_medication">
+            <column name="name" value="bandage"/>
+            <column name="weight" value="50"/>
+            <column name="code" value="BND"/>
+            <column name="image" value="path/to/image.png"/>
+        </insert>
+        <insert tableName="t_medication">
+            <column name="name" value="aspirin"/>
+            <column name="weight" value="50"/>
+            <column name="code" value="ASP"/>
+            <column name="image" value="path/to/image.png"/>
+        </insert>
+        <insert tableName="t_medication">
+            <column name="name" value="syringe"/>
+            <column name="weight" value="30"/>
+            <column name="code" value="SRG"/>
+            <column name="image" value="path/to/image.png"/>
+        </insert>
+        <insert tableName="t_medication">
+            <column name="name" value="tourniquet"/>
+            <column name="weight" value="30"/>
+            <column name="code" value="TRQ"/>
+            <column name="image" value="path/to/image.png"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

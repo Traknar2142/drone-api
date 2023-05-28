@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="t_cargo_insert_data" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="t_cargo"/>
+        </preConditions>
+        <insert tableName="t_cargo">
+            <column name="quantity" value="1"/>
+            <column name="weight" value="50"/>
+            <column name="medication_id" value="1"/>
+        </insert>
+        <insert tableName="t_cargo">
+            <column name="quantity" value="2"/>
+            <column name="weight" value="100"/>
+            <column name="medication_id" value="2"/>
+        </insert>
+        <insert tableName="t_cargo">
+            <column name="quantity" value="3"/>
+            <column name="weight" value="90"/>
+            <column name="medication_id" value="3"/>
+        </insert>
+        <insert tableName="t_cargo">
+            <column name="quantity" value="4"/>
+            <column name="weight" value="120"/>
+            <column name="medication_id" value="4"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

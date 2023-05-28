@@ -1,0 +1,45 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="false" dbms="postgresql,mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="h2"/>
+    <changeSet id="t_drone_create" author="vvprokhorenko">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="t_drone"/>
+                </not>
+            </and>
+        </preConditions>
+
+        <createTable tableName="t_drone">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="serial_number" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="percentage" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="t_drone" indexName="idx_t_drone_state">
+            <column name="state"/>
+        </createIndex>
+        <createIndex tableName="t_drone" indexName="idx_t_drone_serial_number">
+            <column name="serial_number"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
